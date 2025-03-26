@@ -1,19 +1,36 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useBlogStore } from "../store/authBlog.store.js";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css"; // Import styles
+
+const toolbarOptions = [
+  [{ header: [1, 2, 3, false] }],
+  ["bold", "italic", "underline", "strike"],
+  [{ list: "ordered" }, { list: "bullet" }],
+  [{ script: "sub" }, { script: "super" }],
+  [{ indent: "-1" }, { indent: "+1" }],
+  [{ direction: "rtl" }],
+  [{ color: [] }, { background: [] }],
+  [{ align: [] }],
+  ["blockquote", "code-block"],
+  ["link", "image", "video"],
+  ["clean"],
+];
+
+const modules = { toolbar: toolbarOptions };
 
 function CreateBlog() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const navigate = useNavigate();
-
   const { createBlog, loading, error } = useBlogStore();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     await createBlog(title, content);
     if (!error) {
-      navigate("/"); // Redirect on success
+      navigate("/");
     }
   };
 
@@ -43,31 +60,32 @@ function CreateBlog() {
             />
           </div>
 
-          <div>
-            <textarea
-              placeholder="Write your blog content here..."
+          <div className="h-64">
+            <ReactQuill
               value={content}
-              onChange={(e) => setContent(e.target.value)}
-              className="w-full border-b border-black pb-2 focus:outline-none text-xl placeholder-gray-500 h-64 resize-none"
-              required
+              onChange={setContent}
+              modules={modules}
+              theme="snow"
+              placeholder="Compose an epic..."
+              className="h-full"
             />
           </div>
 
-          <div className="flex justify-between items-center">
-            <Link 
-              to="/" 
-              className="text-gray-600 hover:text-black"
-            >
-              Cancel
-            </Link>
-            <button 
-              type="submit"
-              className="border-2 border-black text-black py-3 px-8 rounded-full hover:bg-black hover:text-white transition"
-              disabled={loading}
-            >
-              {loading ? "Publishing..." : "Publish"}
-            </button>
-          </div>
+          <div className="flex justify-between items-center mt-6 pb-6 relative">
+  <Link to="/" className="text-gray-600 hover:text-black">
+    Cancel
+  </Link>
+  <button
+    type="submit"
+    className="border-2 border-black text-black py-3 px-8 rounded-full hover:bg-black hover:text-white transition"
+    disabled={loading}
+    style={{ position: "relative", bottom: "-20px" }} // Ensures spacing
+  >
+    {loading ? "Publishing..." : "Publish"}
+  </button>
+</div>
+
+
         </form>
 
         <div className="text-center mt-12">

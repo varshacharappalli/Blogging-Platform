@@ -6,6 +6,8 @@ import SignUp from "./pages/SignUp"
 import {Routes, Route, Navigate} from 'react-router-dom';
 import ViewMyBlogs from "./pages/ViewMyBlogs";
 import ViewAllBlogs from "./pages/ViewAllBlogs";
+import 'react-quill/dist/quill.snow.css';
+
 
 
 function App() {
