@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useBlogStore } from "../store/blogStore";
+import { useBlogStore } from "../store/authBlog.store.js";
 
 const ViewAllBlogs = () => {
   const { blogs, fetchAllBlogs, loading, error } = useBlogStore();

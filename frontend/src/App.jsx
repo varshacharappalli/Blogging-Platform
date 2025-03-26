@@ -4,6 +4,8 @@ import MainPage from "./pages/MainPage";
 import SignIn from "./pages/SignIn"
 import SignUp from "./pages/SignUp"
 import {Routes, Route, Navigate} from 'react-router-dom';
+import ViewMyBlogs from "./pages/ViewMyBlogs";
+import ViewAllBlogs from "./pages/ViewAllBlogs";
 
 
 function App() {
@@ -16,6 +18,8 @@ function App() {
         <Route path='/signUp' element={<SignUp/>}/>
         <Route path='/createBlog' element={<CreateBlog/>}/>
         <Route path='/main' element={<MainPage/>}/>
+        <Route path='/viewMyBlogs' element={<ViewMyBlogs/>}/>
+        <Route path='/viewAllBlogs' element={<ViewAllBlogs/>}/>
       </Routes>
     </>
   )
