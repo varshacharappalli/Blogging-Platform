@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../store/authUser.store.js';
 
 function SignIn() {
@@ -15,33 +15,61 @@ function SignIn() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-gray-100 to-gray-300">
-      <div className="bg-white p-10 rounded-lg shadow-lg w-96">
-        <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Welcome Back</h2>
-        {error && <div className="text-red-500 mb-4 text-center">{error}</div>}
-        <form onSubmit={handleSubmit}>
-          <input 
-            type="email" 
-            placeholder="Email" 
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full p-3 border rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required 
-          />
-          <input 
-            type="password" 
-            placeholder="Password" 
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full p-3 border rounded-md mb-6 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required 
-          />
+    <div className="min-h-screen bg-white font-serif flex items-center justify-center">
+      <div className="w-full max-w-md px-6">
+        <header className="text-center mb-12">
+          <h1 className="text-4xl font-bold tracking-wide mb-4">BLOGLY</h1>
+          <p className="text-xl text-gray-600">Sign in to continue</p>
+        </header>
+
+        <form onSubmit={handleSubmit} className="space-y-6">
+          {error && (
+            <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg text-center">
+              {error}
+            </div>
+          )}
+
+          <div>
+            <input
+              type="email"
+              placeholder="Email Address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full border-b border-black pb-2 focus:outline-none text-xl placeholder-gray-500"
+              required
+            />
+          </div>
+
+          <div>
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full border-b border-black pb-2 focus:outline-none text-xl placeholder-gray-500"
+              required
+            />
+          </div>
+
+          <div className="text-right">
+            <a href="#" className="text-gray-600 hover:text-black">Forgot Password?</a>
+          </div>
+
           <button 
             type="submit" 
-            className="w-full bg-blue-600 text-white p-3 rounded-md font-semibold hover:bg-blue-700 transition duration-300"
+            className="w-full border-2 border-black text-black py-3 rounded-full hover:bg-black hover:text-white transition"
           >
             Sign In
           </button>
+
+          <div className="text-center pt-6">
+            <p className="text-gray-600">
+              Don't have an account? {' '}
+              <Link to="/signUp" className="text-black hover:underline">
+                Sign Up
+              </Link>
+            </p>
+          </div>
         </form>
       </div>
     </div>
